@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!-- edit -->
+<html ng-app="App">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <title>Angular Example</title>
+</head>
+
+<body ng-controller="mainController">
+
+<p class="test_1"> {{data}}</p>
+<div class="calcul_area" id="area" ng-init="isClear=false">{{isClear ? 0 : numberInput}}</div>
+<div class="calculatrice">
+    <div class="operators" ng-repeat="operator in operators" ng-click="$parent.currentOperator = operator  ">
+        {{operator}}
+
+    </div>
+    <div class="chiffres" id="calc" ng-repeat="val in entier"
+         ng-click="$parent.numberInput = val ; addition(number.length)">
+        {{val}}
+    </div>
+    <div class="egal" ng-click="showResult()"> =</div>
+    <div class="clear" ng-click="clear() "> CE</div>
+
+</div>
+
+
+</body>
+<script type="text/javascript" src="./node_modules/angular/angular.js"></script>
+<!-- edit -->
+<script type="text/javascript" src="./app.js"></script>
+</html>
