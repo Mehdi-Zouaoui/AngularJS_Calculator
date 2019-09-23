@@ -8,21 +8,29 @@
     <title>Angular Example</title>
 </head>
 
-<body ng-controller="mainController">
-
-<p class="test_1"> {{data}}</p>
-<div class="calcul_area" id="area" ng-init="isClear=false">{{isClear ? 0 : numberInput}}</div>
-<div class="calculatrice">
-    <div class="operators" ng-repeat="operator in operators" ng-click="$parent.currentOperator = operator  ">
+<body ng-controller="mainController as ctrl">
+<!--<pre>-->
+<!--    {{ctrl.calc}}-->
+<!--    <br>-->
+<!--    {{ctrl.operation}}-->
+<!--    <br>-->
+<!--    {{ctrl.result}}-->
+<!--</pre>-->
+<p class="test_1"> {{ctrl.data}}</p>
+<div class="operationDisplay">
+<div class="calcul_area" id="area" ng-init="isClear=false">{{isClear ? 0 : ctrl.calculatorDisplay()}}</div>
+</div>
+    <div class="calculatrice">
+    <div class="operators" ng-repeat="operator in ctrl.operators" ng-click="ctrl.onOperatorClic(operator) ">
         {{operator}}
 
     </div>
-    <div class="chiffres" id="calc" ng-repeat="val in entier"
-         ng-click="$parent.numberInput = val ; addition(number.length)">
+    <div class="chiffres" id="calc" ng-repeat="val in ctrl.entier"
+         ng-click="ctrl.numberInput = val ;  ctrl.onDigitClic(val)">
         {{val}}
     </div>
-    <div class="egal" ng-click="showResult()"> =</div>
-    <div class="clear" ng-click="clear() "> CE</div>
+    <div class="egal" ng-click="ctrl.showResult(ctrl.number)"> =</div>
+    <div class="clear" ng-click="ctrl.clear()">CE</div>
 
 </div>
 

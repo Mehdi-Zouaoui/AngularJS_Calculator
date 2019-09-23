@@ -3,43 +3,77 @@ angular.module("App", ['main']);
 angular.module("main", []);
 
 angular.module("main").controller("mainController", function ($scope) {
+    const ctrl = this;
+    ctrl.numberInput = 0;
+    ctrl.data = "Calculatrice";
+    ctrl.entier = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    ctrl.calc = [];
+    ctrl.affichage = null;
+    ctrl.digitCtrl = "";
+    ctrl.operation = 0;
+    ctrl.result = 0;
+    ctrl.operators = ["+", "-", "/", "*"];
+    ctrl.currentOperator = "";
+    ctrl.operationDisplay = [];
+    ctrl.operatorsDisplay = [];
 
-    $scope.data = "Calculatrice";
-    $scope.entier = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    $scope.number = [];
-    $scope.result = 0;
-    $scope.operators = ["+", "-", "/", "*"];
-    $scope.currentOperator = "";
+   ctrl.calculatorDisplay = function(){
+        if (ctrl.digitCtrl === "") {
+            ctrl.affichage = ctrl.result;
+        } else ctrl.affichage = ctrl.digitCtrl;
+        return ctrl.affichage;
+    };
 
-    $scope.addition = function (tabIndice) {
-        $scope.isClear = false;
-        $scope.number.push($scope.numberInput);
-        switch ($scope.currentOperator) {
-            case "+" :
-                $scope.result = $scope.result + $scope.number[tabIndice];
-                break;
-            case "-" :
-                $scope.result = $scope.result - $scope.number[tabIndice];
-                break;
-            case "*" :
-                $scope.result = $scope.result * $scope.number[tabIndice];
-                break;
-            case "/" :
-                $scope.result = $scope.result / $scope.number[tabIndice];
-                break;
-            default :
-                $scope.result = $scope.number[tabIndice];
+    ctrl.showResult = function (tab) {
+    };
+
+    ctrl.clear = function () {
+        ctrl.result = 0;
+        ctrl.calc = [];
+        ctrl.digitCtrl = "";
+        ctrl.isClear = true;
+    };
+
+    ctrl.onOperatorClic = function(input) {
+        ctrl.isClear = false;
+        ctrl.currentOperator = input;
+        ctrl.operatorsDisplay.push(ctrl.currentOperator);
+        if (ctrl.calc.length < 2) {
+            if(ctrl.calc.length === 0 ){
+                ctrl.result = ctrl.digitCtrl;
+            }
+            ctrl.calc.push(ctrl.digitCtrl);
+            ctrl.digitCtrl = "";
+        } if (ctrl.calc.length === 2) {
+            for(let i = 0 ; i < ctrl.operatorsDisplay.length ; i++) {
+                switch (ctrl.operatorsDisplay[i-1]) {
+                    case "+" :
+                        ctrl.result = Number(ctrl.calc[0]) + Number(ctrl.calc[1]);
+                        break;
+                    case "-" :
+                        ctrl.result = Number(ctrl.calc[0]) - Number(ctrl.calc[1]);
+                        break;
+                    case "*" :
+                        ctrl.result = Number(ctrl.calc[0]) * Number(ctrl.calc[1]);
+                        break;
+                    case "/" :
+                        ctrl.result = Number(ctrl.calc[0]) / Number(ctrl.calc[1]);
+                        break;
+                }
+            }
+            ctrl.calc = [];
+            ctrl.calc.push(ctrl.result);
+
+            ctrl.operationDisplay.push(ctrl.result);
+
+
         }
-        tabIndice = tabIndice + 1;
-        return tabIndice;
     };
-    $scope.showResult = function () {
-        $scope.numberInput = $scope.result;
+
+    ctrl.onDigitClic = function(input){
+        ctrl.digitCtrl += input ;
     };
-    $scope.clear = function () {
-        $scope.result = 0;
-        $scope.number.splice(0, $scope.number.length);
-        $scope.isClear = true;
+    ctrl.fullCalcul = function(){
 
     }
  });
