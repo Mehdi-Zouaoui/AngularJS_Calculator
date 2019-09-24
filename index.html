@@ -17,19 +17,22 @@
 <!--    {{ctrl.result}}-->
 <!--</pre>-->
 <p class="test_1"> {{ctrl.data}}</p>
-<div class="operationDisplay">
-<div class="calcul_area" id="area" ng-init="isClear=false">{{isClear ? 0 : ctrl.calculatorDisplay()}}</div>
+
+<div class="calcul_area" id="area" ng-init="isClear=false">
+    <div class="operationDisplay">{{ctrl.showOperation}}</div>
+    {{isClear ? 0 : ctrl.calculatorDisplay()}}
 </div>
-    <div class="calculatrice">
-    <div class="operators" ng-repeat="operator in ctrl.operators" ng-click="ctrl.onOperatorClic(operator) ">
+
+<div class="calculatrice">
+    <div class="operators" ng-repeat="operator in ctrl.operators" ng-click="ctrl.onOperatorClic(operator) ; ctrl.showCalcul(operator);">
         {{operator}}
 
     </div>
     <div class="chiffres" id="calc" ng-repeat="val in ctrl.entier"
-         ng-click="ctrl.numberInput = val ;  ctrl.onDigitClic(val)">
+         ng-click="ctrl.numberInput = val ;  ctrl.onDigitClic(val) "  >
         {{val}}
     </div>
-    <div class="egal" ng-click="ctrl.showResult(ctrl.number)"> =</div>
+
     <div class="clear" ng-click="ctrl.clear()">CE</div>
 
 </div>
