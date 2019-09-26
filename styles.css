@@ -8,11 +8,11 @@ body {
 }
 
 .calculatrice{
-    margin: 0 auto;
+    margin: 16px auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 500px;
+    width: 730px;
     height: auto;
     flex-wrap: wrap;
 
@@ -63,8 +63,16 @@ body {
     justify-self: flex-start;
     margin-right: 100px;
 }
-
+.bottom{
+    display: flex;
+}
 .test_1 {
-    font-size: 50px;
+    font-size: 30px;
     text-align: center;
+}
+.tampon{
+
+    height: 303px;
+    width: 200px;
+    border: 1px solid black;
 }
