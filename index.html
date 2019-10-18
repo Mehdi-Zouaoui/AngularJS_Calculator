@@ -4,43 +4,59 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <title>Angular Example</title>
 </head>
 
 <body ng-controller="mainController as ctrl">
-<!--TODO -->
-<!--1# Faire en sorte que qu'on ne puisse entrer qu'une seul opérateur a chaque calcul  -->
-<!--#2 Afficher directement le chiffre pour x² x³ √x 1/x
-       #3 Done
-       #4 Done
-       #5 Faire en sorte qu'il n'y est plus qu'une seule fonction dans les ng-click
-       #6 limiter à un le nombre de calcul push dans la même li de la mémoire tampon
-       -->
-
 <p class="test_1"> {{ctrl.data}}</p>
 
-<div class="calcul_area" id="area">
-    <div class="operationDisplay">{{ctrl.showOperation}}</div>
-    {{isClear ? 0 : ctrl.calculatorDisplay()}}
+<div class="calcul_area d-flex flex-column justify-content-center align-items-center" id="area">
+    <div class="operationDisplay">{{ctrl.operationDisplay}}</div>
+    {{ctrl.calculatorDisplay()}}
 </div>
 
-<div class="bottom">
-<div class="calculatrice">
-    <div class="operators" ng-repeat="operator in ctrl.operators" ng-click="ctrl.onOperatorClic(operator)  ">
-        {{operator}}
+<div class="bottom text-center d-flex flex-row justify-content-around align-items-center m-auto"
+     style="font-size: 18px">
+    <div class="calculatrice d-flex flex-row align-items-start">
 
+        <div class="mathFunction_container col-lg-2">
+            <div class="mathFunction btn-dark" ng-repeat="func in ctrl.mathFunctions"
+                 ng-click="ctrl.onFunctionClic(func)">
+                {{func}}
+            </div>
+        </div>
+        <div class="calc_container d-flex flex-column col-lg-8">
+            <div class="operator_container d-flex w-100">
+                <div class="operators btn-warning " ng-repeat="operator in ctrl.operators"
+                     ng-click="ctrl.onOperatorClic(operator)  ">
+                    {{operator}}
+                </div>
+            </div>
+            <div class="chiffres_contiainer d-flex flex-wrap justify-content-start">
+                <div class="chiffres btn-danger " id="calc" ng-repeat="val in ctrl.entier"
+                     ng-click="ctrl.onDigitClic(val)">
+                    {{val}}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="signes_container d-flex flex-column col-lg-2 ">
+            <div class="clear btn-secondary " ng-click="ctrl.clear()">CE</div>
+            <div class="signe btn-secondary " ng-click="ctrl.isNegativInput()"> ±</div>
+            <div class="egal btn-secondary " ng-click="ctrl.onEgalClic()">=</div>
+        </div>
     </div>
-    <div class="chiffres" id="calc" ng-repeat="val in ctrl.entier"
-         ng-click="ctrl.onDigitClic(val)"  >
-        {{val}}
+    <div class="tampon_container col-4 mr-5 ml-5 d-flex flex-column ">
+        <h3>Mémoire tampon</h3>
+        <div class="tampon" ng-if="ctrl.tamponDisplay.length > 0"
+             ng-repeat="tamp in ctrl.tamponDisplay track by $index">{{tamp}}
+
+        </div>
     </div>
-
-    <div class="clear" ng-click="ctrl.clear()  ">CE</div>
-</div>
-<div class="tampon"  ng-repeat="tamp in  ctrl.tamponDisplay">{{tamp}}
-
-</div>
 </div>
 </body>
 <script type="text/javascript" src="./node_modules/angular/angular.js"></script>
