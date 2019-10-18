@@ -1,3 +1,5 @@
+# Angular Calculator
+
 Hello Readme readers.
 
 Here's one of my very first project with angular 1.7
