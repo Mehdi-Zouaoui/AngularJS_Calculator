@@ -4,7 +4,7 @@ angular.module("main", []);
 
 angular.module("main").controller("mainController", function ($scope) {
     const ctrl = this;
-    ctrl.data = "Calculatrice";
+    ctrl.data = "Calculator";
     ctrl.entier = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ,"."];
     ctrl.calc = [];
     ctrl.index = 0;
@@ -174,6 +174,9 @@ angular.module("main").controller("mainController", function ($scope) {
         // On stock les chiffres et les opérateur dans une variable
         ctrl.operationDisplay += ctrl.digitDisplay[ctrl.index] + ' ' + ctrl.operatorsDisplay[ctrl.index] + ' ';
         ctrl.index += 1;
+    };
+    ctrl.tamponClear = function(){
+        ctrl.tamponDisplay = [];
     };
 
     ////
